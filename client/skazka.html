@@ -1,0 +1,20 @@
+<template name="skazkaToaster">
+    <div class="skazka-toaster skazka-toaster-{{position}}">
+        {{#each visibleToasts}}
+            <div class="skazka-toast-wrapper" style="z-index: {{zIndex}}">
+                <div class="skazka-toast skazka-toast-{{type}}"
+                     data-id="{{id}}"
+                     data-stacked="{{isStacked}}"
+                     data-visible="{{#if visible}}true{{else}}false{{/if}}">
+                    <div class="skazka-toast-content">
+                        {{#if title}}
+                            <div class="skazka-toast-title">{{title}}</div>
+                        {{/if}}
+                        <div class="skazka-toast-message">{{message}}</div>
+                    </div>
+                    <button class="skazka-toast-close" data-id="{{id}}">×</button>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</template>

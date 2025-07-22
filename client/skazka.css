@@ -1,0 +1,169 @@
+.skazka-toaster {
+    position: fixed;
+    z-index: 9999;
+    padding: 16px;
+    width: 356px;
+    max-height: 100vh;
+    overflow: visible;
+}
+
+/* Позиции */
+.skazka-toaster-bottom-right {
+    bottom: 0;
+    right: 0;
+}
+
+.skazka-toaster-bottom-left {
+    bottom: 0;
+    left: 0;
+}
+
+.skazka-toaster-top-right {
+    top: 0;
+    right: 0;
+}
+
+.skazka-toaster-top-left {
+    top: 0;
+    left: 0;
+}
+
+.skazka-toast-wrapper {
+    position: relative;
+    transition: all 0.3s ease;
+    margin-bottom: 8px;
+}
+
+.skazka-toast {
+    position: relative;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    animation: skazka-fade-in 0.3s ease-out;
+    transition: all 0.3s ease;
+    transform-origin: bottom center;
+    background: white;
+    color: #333;
+
+    will-change: transform, opacity; /* Улучшает производительность анимаций */
+
+}
+
+/* Стили для стека */
+.skazka-toast[data-stacked="true"] {
+    position: absolute;
+    /*transform: scale(0.95);*/
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.9;
+    z-index: 1;
+}
+
+/* Раскрытие при наведении */
+.skazka-toaster:hover .skazka-toast[data-stacked="true"] {
+    position: relative;
+    transform: scale(1);
+    opacity: 1;
+    margin-bottom: 8px;
+}
+
+/* Контент */
+.skazka-toast-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.skazka-toast-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+    font-size: 14px;
+}
+
+.skazka-toast-message {
+    font-size: 14px;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+/* Кнопка закрытия */
+.skazka-toast-close {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin-left: 8px;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.skazka-toast-close:hover {
+    opacity: 1;
+}
+
+/* Цвета для типов */
+.skazka-toast-success {
+    background-color: #f0fdf4;
+    color: #166534;
+    border-left: 4px solid #22c55e;
+}
+
+.skazka-toast-error {
+    background-color: #fef2f2;
+    color: #b91c1c;
+    border-left: 4px solid #ef4444;
+}
+
+.skazka-toast-info {
+    background-color: #eff6ff;
+    color: #1e40af;
+    border-left: 4px solid #3b82f6;
+}
+
+.skazka-toast-warning {
+    background-color: #fffbeb;
+    color: #b45309;
+    border-left: 4px solid #f59e0b;
+}
+
+.skazka-toast[data-visible="true"] {
+    animation: toast-enter 0.4s cubic-bezier(0.21, 1.02, 0.73, 1) forwards;
+}
+
+.skazka-toast[data-visible="false"] {
+    animation: toast-exit 0.4s cubic-bezier(0.61, 1, 0.88, 1) forwards;
+    pointer-events: none; /* Отключаем взаимодействие во время анимации */
+
+}
+
+/*@keyframes skazka-fade-in {*/
+/*    from { opacity: 0; transform: translateY(10px); }*/
+/*    to { opacity: 1; transform: translateY(0); }*/
+/*}*/
+
+/* Анимация входа - вылет снизу */
+@keyframes toast-enter {
+    0% {
+        transform: translateY(100px) scale(1);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Анимация выхода - улет вниз */
+@keyframes toast-exit {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100px) scale(0.9);
+        opacity: 0;
+    }
+}
